@@ -187,8 +187,8 @@ class iz_feed_Admin {
 			if(strpos($link, " ")){
 				$ilink = str_replace(" ", "%20", $link);
 			}
-			$the_title = addslashes(str_replace("&", "%26", htmlspecialchars($thetitle)));
-			$description = addslashes(str_replace("&", "%26", htmlspecialchars($description)));
+			$the_title = urlencode(htmlspecialchars($thetitle));
+			$description = urlencode(htmlspecialchars($description));
 			// add product to array but don't add the parent of product variations
 			if (!empty($sku)) $full_product_list[] = array(
 			"id" => $theid,
