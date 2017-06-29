@@ -182,7 +182,7 @@ class iz_feed_Admin {
 			$currency = get_woocommerce_currency();
 			$link = get_permalink($theid);
 			$ilink = wp_get_attachment_image_src( get_post_thumbnail_id($theid))[0];
-			
+			// based on google merchant settings
 			// Google doesn't allow & in the feed
 			$the_title = "<![CDATA[".iz_feed_Admin::removeUnsafeXML($thetitle)."]]>";
 			$description = "<![CDATA[".iz_feed_Admin::removeUnsafeXML($description)."]]>";
