@@ -112,6 +112,13 @@ class iz_feed_Admin {
 		add_submenu_page('iz-feed', 'Add new feed','Add new feed', 'export', 'iz-new-feed', array('iz_feed_Admin','iz_admin_new_feed'));
 	}
 	
+	//Function to remove unfriendly XML Characters
+	public function removeUnsafeXML($VarVal) {
+		$output = str_replace('&', '&amp;', $VarVal);
+		$output = preg_replace('/[^(\x20-\x7F)]*/','', $output);
+		return $output;
+	}
+	
 	public function get_product_list(){
 		$full_product_list = array();
 		
@@ -170,43 +177,33 @@ class iz_feed_Admin {
 				$am = explode("-",$sku);
 				$amount = $am[1];
 			}else{
-				$amount = 1;
+				$amount = 0;
 			}
 			$currency = get_woocommerce_currency();
 			$link = get_permalink($theid);
-			if(strpos($link, "&")){
-				$link = str_replace("&", "%26", $link);
-			}
-			if(strpos($link, " ")){
-				$link = str_replace(" ", "%20", $link);
-			}
 			$ilink = wp_get_attachment_image_src( get_post_thumbnail_id($theid))[0];
-			if(strpos($ilink, "&")){
-				$ilink = str_replace("&", "%26", $link);
-			}
-			if(strpos($link, " ")){
-				$ilink = str_replace(" ", "%20", $link);
-			}
-			$the_title = urlencode(htmlspecialchars($thetitle));
-			$description = urlencode(htmlspecialchars($description));
+			
+			// Google doesn't allow & in the feed
+			$the_title = "<![CDATA[".iz_feed_Admin::removeUnsafeXML($thetitle)."]]>";
+			$description = "<![CDATA[".iz_feed_Admin::removeUnsafeXML($description)."]]>";
 			// add product to array but don't add the parent of product variations
 			if (!empty($sku)) $full_product_list[] = array(
 			"id" => $theid,
 			"sku" => $sku, 
-			"title" => $the_title,
-			"description" => $description,
 			"price" => get_post_meta($theid, '_price', true) . " " . $currency,
 			"availability" => $availability,
-			"link" => $link,
-			"image_link" => $ilink,
+			"link" => "<![CDATA[".$link."]]>",
+			"image_link" => "<![CDATA[".$ilink."]]>",
 			"google_product_category" => 209,
 			"brand" => "iZ-Sock",
 			"condition" => "new",
 			"adult" => "no",
-			"multipack" => $amount,
+			
 			"is_bundle" => "no",
 			"age_group" => "adult",
 			"gender" => "unisex",
+			"title" => $the_title,
+			"description" => $description,
 			);
 		endwhile; wp_reset_query();
 		// sort into alphabetical order, by title
@@ -240,7 +237,8 @@ class iz_feed_Admin {
 			$filename = time() . $storename .".xml";
 		}
 		$xml = fopen(ABSPATH . "/iz-feed/" . $filename, "w") or die("Unable to open file!");
-			fwrite($xml, '<?xml version="1.0"?>'."\n<channel>\n");
+			fwrite($xml, '<?xml version="1.0"?>');
+			fwrite($xml, '<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">\n'.'\n<channel>\n');
 			fwrite($xml, "<title>".$prettyname."</title>\n");
 			fwrite($xml, "<link>".$link."</link>\n");
 			fwrite($xml, "<description>".$description."</description>\n");
@@ -248,11 +246,12 @@ class iz_feed_Admin {
 			foreach ($list as $element) {
 				fwrite($xml, "  <item>\n");
 				foreach ($element as $child => $value) {
-					fwrite($xml, "    <$child>$value</$child>\n");
+					fwrite($xml, "    <g:$child>$value</g:$child>\n");
 				}
 				fwrite($xml, "  </item>\n");
 			}
 			fwrite($xml, "</channel>\n");
+			fwrite($xml, "</rss>");
 			fclose($xml);
 			return $filename;
 		
