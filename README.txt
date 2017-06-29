@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== iZ Product Feed ===
 Contributors: Mike Koopman
 Tags: Woocommerce Product Feed
 Requires at least: Wordpress 4.7.5 + Woocommerce 2.6.14
