@@ -1,0 +1,47 @@
+/**
+ * All of the CSS for your admin-specific functionality should be
+ * included in this file.
+ */
+ .iz-admin-table{
+	 margin: auto;
+	 width: 90%;
+	 text-align: center;
+	 border: 1px solid;
+	 border-color: #000000;
+ }
+ .iz-admin-header{
+	 border: 1px solid;
+	 border-color: #000000;
+	 background-color: #CCCCCC;
+ }
+ .iz-admin-row{
+	 text-align: center;
+	 border: 1px solid;
+	 border-color: #000000;
+ }
+ .iz-admin-table td{
+	 width: 20%;
+ }
+ .iz-admin-container{
+	 width: 100%;
+	 padding-top: 10px;
+	 margin: auto;
+ }
+ .iz-add-feed-button{
+	 background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+ }
+ .iz-admin-delete{
+	 background-color: #f47142;
+	 border:2px solid;
+	 border-color: #FF0000;
+	 
+ }
