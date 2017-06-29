@@ -132,6 +132,7 @@ class iz_feed_Admin {
 				$parent_id = wp_get_post_parent_id($theid );
 				$sku = get_post_meta($theid, '_sku', true );
 				$thetitle = get_the_title( $parent_id);
+				$description = get_post_field('post_content', $parent_id);
 	 
 		// ****** Some error checking for product database *******
 				// check if variation sku is set
@@ -150,7 +151,6 @@ class iz_feed_Admin {
 						if (function_exists(add_to_debug)) add_to_debug('empty sku id='.$theid.'parent='.$parent_id.'setting sku to '.$sku);
 						update_post_meta($theid, '_sku', $sku );
 						update_post_meta($parent_id, '_sku', '' );
-						$description = get_post_field('post_content', $parent_id);
 					}
 				}
 		// ****************** end error checking *****************
@@ -184,21 +184,20 @@ class iz_feed_Admin {
 			$ilink = wp_get_attachment_image_src( get_post_thumbnail_id($theid))[0];
 			// based on google merchant settings
 			// Google doesn't allow & in the feed
-			$the_title = "<![CDATA[".iz_feed_Admin::removeUnsafeXML($thetitle)."]]>";
-			$description = "<![CDATA[".iz_feed_Admin::removeUnsafeXML($description)."]]>";
+			$the_title = iz_feed_Admin::removeUnsafeXML($thetitle);
+			$description = iz_feed_Admin::removeUnsafeXML($description);
 			// add product to array but don't add the parent of product variations
 			if (!empty($sku)) $full_product_list[] = array(
 			"id" => $theid,
 			"sku" => $sku, 
 			"price" => get_post_meta($theid, '_price', true) . " " . $currency,
 			"availability" => $availability,
-			"link" => "<![CDATA[".$link."]]>",
-			"image_link" => "<![CDATA[".$ilink."]]>",
+			"link" => $link,
+			"image_link" => $ilink,
 			"google_product_category" => 209,
 			"brand" => "iZ-Sock",
 			"condition" => "new",
 			"adult" => "no",
-			
 			"is_bundle" => "no",
 			"age_group" => "adult",
 			"gender" => "unisex",
@@ -231,6 +230,9 @@ class iz_feed_Admin {
 			foreach ($list as $element) {
 				fwrite($xml, "  <item>\n");
 				foreach ($element as $child => $value) {
+					if( in_array($child, array("title","description","link","image_link"))){
+						$value = "<![CDATA[".$value."]]>";
+					}
 					fwrite($xml, "    <g:$child>$value</g:$child>\n");
 				}
 				fwrite($xml, "  </item>\n");
