@@ -211,28 +211,13 @@ class iz_feed_Admin {
 		return $full_product_list;
 	}
 	
-	public function array_to_xml( $data, &$xml_data ) {
-		foreach( $data as $key => $value ) {
-			if( is_numeric($key) ){
-				$key = 'item'.$key; //dealing with <0/>..<n/> issues
-			}
-			if( is_array($value) ) {
-				$subnode = $xml_data->addChild($key);
-				iz_feed_Admin::array_to_xml($value, $subnode);
-			} else {
-				$xml_data->addChild("$key",htmlspecialchars("$value"));
-			}
-		 }
-		 return $xml_data;
-	}
-	
 	public function create_xml_feed($filename = null){
 		//based on google merchant settings
 		$list = iz_feed_Admin::get_product_list();
 		$prettyname = get_bloginfo("name");
 		$description = get_bloginfo("description");
 		$link = get_bloginfo("url");
-		$storename = htmlspecialchars(get_bloginfo("name"));
+		$storename = urlencode(htmlspecialchars(get_bloginfo("name")));
 		if(!$filename){
 			$filename = time() . $storename .".xml";
 		}
