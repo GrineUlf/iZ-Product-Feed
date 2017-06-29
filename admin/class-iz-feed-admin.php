@@ -123,10 +123,9 @@ class iz_feed_Admin {
 		$full_product_list = array();
 		
 		$loop = new WP_Query( array( 'post_status' => 'publish', 'post_type' => array('product', 'product_variation'), 'posts_per_page' => -1, ) );
-	 
 		while ( $loop->have_posts() ) : $loop->the_post();
 			$theid = get_the_ID();
-			$product = new WC_Product($theid);
+			$product = wc_get_product($theid);
 			// its a variable product
 			if( get_post_type() == 'product_variation' ){
 				$parent_id = wp_get_post_parent_id($theid );
