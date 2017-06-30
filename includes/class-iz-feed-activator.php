@@ -66,6 +66,9 @@ class iz_feed_Activator {
 		if(!file_exists(ABSPATH . "iz-feed")){
 			mkdir(ABSPATH ."iz-feed", 0777, true);
 		}
+		if(!file_exists(ABSPATH ."iz-feed.php")){
+			copy("iz-feed.php", ABSPATH . "iz-feed.php");
+		}
 		add_action('iz_create_cron', array('iz_feed_Activator','iz_cron'));
 		add_action('wp', array('iz_feed_Activator','iz_set_cron'));
 		
