@@ -244,8 +244,8 @@ class iz_feed_Admin {
 	}
 	
 	public function create_json_feed(){
-		//based on clerk settings
-		
+		$id = time();
+		return $id;
 	}
 	
 	public function iz_admin_create_feed(){
@@ -253,14 +253,16 @@ class iz_feed_Admin {
 		$feed_name = $_POST["feed_name"];
 		$feed_type = $_POST["feed_type"];
 		$feed_active = $_POST["feed_active"];
+		$link = get_bloginfo("url");
 		//Time to call a function that will create the desired feed
 		switch($feed_type){
 			case "XML":
 				$feed = iz_feed_Admin::create_xml_feed();
+				$url = $link."/iz-feed/".$feed;
 			break;
 			case "JSON":
-				$feed = false;
-				//iz_feed_Admin::create_json_feed();
+				$feed = iz_feed_Admin::create_json_feed();
+				$url = $link."/iz_feed.php?id=".$feed;
 			break;
 			case "CSV":
 				$feed = false;
@@ -274,7 +276,7 @@ class iz_feed_Admin {
 		}else{
 			$active = 0;
 		}
-		$link = get_bloginfo("url");
+		
 		if($feed){
 			global $wpdb;
 			$table_name = $wpdb->prefix . "iz_feed_settings";
@@ -285,7 +287,7 @@ class iz_feed_Admin {
 					'active' => $active, 
 					'name' => $feed_name,
 					'type' => $feed_type,
-					'location' => $link."/iz-feed/".$feed,
+					'location' => $url,
 					'filename' => $feed,
 					'date_created' => current_time( 'mysql' ),
 					'date_edited' => current_time( 'mysql' )

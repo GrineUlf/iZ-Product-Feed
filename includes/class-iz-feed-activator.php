@@ -38,7 +38,7 @@ class iz_feed_Activator {
 	public function iz_cron(){
 		global $wpdb;
 		$table_name = $wpdb->prefix . "iz_feed_settings";
-		foreach( $wpdb->get_results("SELECT * FROM ".$table_name." WHERE active = 1;") as $key => $row) {
+		foreach( $wpdb->get_results("SELECT * FROM ".$table_name." WHERE active = 1 AND type = 'XML';") as $key => $row) {
 			$create = create_xml_feed($row->filename);
 		}
 	}
@@ -66,8 +66,9 @@ class iz_feed_Activator {
 		if(!file_exists(ABSPATH . "iz-feed")){
 			mkdir(ABSPATH ."iz-feed", 0777, true);
 		}
-		if(!file_exists(ABSPATH ."iz-feed.php")){
-			copy("iz-feed.php", ABSPATH . "iz-feed.php");
+		if(!file_exists(ABSPATH ."iz_feed.php")){
+			$filename = plugin_dir_path(__FILE__) . "iz_feed.php";
+			copy($filename, ABSPATH . "iz_feed.php");
 		}
 		add_action('iz_create_cron', array('iz_feed_Activator','iz_cron'));
 		add_action('wp', array('iz_feed_Activator','iz_set_cron'));

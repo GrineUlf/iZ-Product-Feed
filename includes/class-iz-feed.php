@@ -22,7 +22,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
+ * @since      2.0.0
  * @package    Iz Product Feed
  * @subpackage Iz-product-feed/includes
  * @author     Mike Koopman <mike@blaesbjerg.com>
@@ -69,7 +69,7 @@ class iz_feed {
 	public function __construct() {
 
 		$this->plugin_name = 'Iz-product-feed';
-		$this->version = '1.0.0';
+		$this->version = '2.0.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
