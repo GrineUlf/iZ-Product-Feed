@@ -6,8 +6,8 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://github.com/GrineUlf/iZ-Product-Feed/
+ * @since      2.0.0
  *
  * @package    Iz Product Feed
  * @subpackage Iz-product-feed/includes

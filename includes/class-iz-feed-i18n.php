@@ -1,16 +1,13 @@
 <?php
 
 /**
- * Define the internationalization functionality
+ * The public-facing functionality of the plugin.
  *
- * Loads and defines the internationalization files for this plugin
- * so that it is ready for translation.
+ * @link       https://github.com/GrineUlf/iZ-Product-Feed/
+ * @since      2.0.0
  *
- * @link       http://example.com
- * @since      1.0.0
- *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
+ * @package    Iz-product-feed
+ * @subpackage Iz-product-feed/includes
  */
 
 /**
@@ -19,10 +16,9 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @since      1.0.0
- * @package    Plugin_Name
- * @subpackage Plugin_Name/includes
- * @author     Your Name <email@example.com>
+ * @package    iz-product-feed
+ * @subpackage iz-product-feed/includes
+ * @author     Mike Koopman <mike@blaesbjerg.com>
  */
 class iz_feed_i18n {
 

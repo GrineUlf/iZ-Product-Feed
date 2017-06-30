@@ -3,11 +3,11 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       http://example.com
- * @since      1.0.0
+ * @link       https://github.com/GrineUlf/iZ-Product-Feed/
+ * @since      2.0.0
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/admin
+ * @package    iz-product-feed
+ * @subpackage iz-product-feed/admin
  */
 
 /**
@@ -16,9 +16,9 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Plugin_Name
- * @subpackage Plugin_Name/admin
- * @author     Your Name <email@example.com>
+ * @package    iz-product-feed
+ * @subpackage iz-product-feed/admin
+ * @author     Mike Koopman <mike@blaesbjerg.com>
  */
 class iz_feed_Admin {
 

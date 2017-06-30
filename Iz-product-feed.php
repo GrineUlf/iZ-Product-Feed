@@ -8,20 +8,20 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://www.blaesbjerg.com
- * @since             1.0.0
+ * @link		      https://github.com/GrineUlf/iZ-Product-Feed/
+ * @since             2.0.0
  * @package           Iz Product Feed
  *
  * @wordpress-plugin
  * Plugin Name:       Iz Product Feed
- * Plugin URI:        http://example.com/plugin-name-uri/
- * Description:       Google Merchant Product Feed for Woocommerce
- * Version:           1.0.0
+ * Plugin URI:        https://github.com/GrineUlf/iZ-Product-Feed/
+ * Description:       Google Merchant + Clerk.io Product Feed for Woocommerce
+ * Version:           2.0.0
  * Author:            Mike Koopman
- * Author URI:        http://www.aleval.nl
+ * Author URI:        https://github.com/GrineUlf/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       plugin-name
+ * Text Domain:       iz-product-feed
  * Domain Path:       /languages
  */
 
