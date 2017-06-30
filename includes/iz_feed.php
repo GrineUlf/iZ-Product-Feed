@@ -8,7 +8,7 @@ if(isset($_GET["id"])){
 		$json = iz_feed_Public::iz_create_feed($id);
 		echo $json;
 	}else{
-		echo "Invalid access token.";
+		echo "Unknown access token.";
 	}
 }else{
 	echo "Invalid access token.";
